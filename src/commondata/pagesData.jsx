@@ -14,10 +14,10 @@ export default function PagesDataTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchType, setSearchType] = useState("");
-    const [searchStatus, setSearchStatus] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    // const [searchType, setSearchType] = useState("");
+    // const [searchStatus, setSearchStatus] = useState("");
+    // const [startDate, setStartDate] = useState("");
+    // const [endDate, setEndDate] = useState("");
     const dispatch = useDispatch();
     // const { data, isError, error, isLoading, isFetching, isSuccess } = useGetAllPagesQuery()
     // const [updateStatus, { isLoading: loading }] = useUpdatePageStatusMutation()
