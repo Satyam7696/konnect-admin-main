@@ -132,7 +132,7 @@ export default function AllPaymentsDataTable() {
                     <Form.Group className="m-3">
                         <Form.Control
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Search By Name"
                             value={searchTerm}
                             onChange={handleSearch}
                         />

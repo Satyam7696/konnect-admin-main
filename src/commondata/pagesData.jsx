@@ -14,6 +14,10 @@ export default function PagesDataTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchType, setSearchType] = useState("");
+    const [searchStatus, setSearchStatus] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     const dispatch = useDispatch();
     // const { data, isError, error, isLoading, isFetching, isSuccess } = useGetAllPagesQuery()
     // const [updateStatus, { isLoading: loading }] = useUpdatePageStatusMutation()
@@ -121,9 +125,20 @@ export default function PagesDataTable() {
     // const postsData = Array.isArray(data?.data) && data?.data.length > 0 ? data.data : [];
     const postsData = data ?? [];
 
-    const filteredData = postsData?.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredData = postsData
+    .filter((item) =>item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((item) =>item.type.toLowerCase().includes(searchType.toLowerCase()))
+    .filter((item) => (searchStatus !== "" ? item.status === searchStatus : true))
+    .filter((item) => {
+        if (startDate && endDate) {
+            const itemDate = new Date(item.date);
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            return itemDate >= start && itemDate <= end;
+        }
+        return true;
+    });
+
     const itemsPerPage = pageSize;
     const totalPages = Math.ceil(filteredData?.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -172,16 +187,85 @@ export default function PagesDataTable() {
         setSearchTerm(e.target.value);
         setCurrentPage(1);
     };
+
+    const handleSearchType = (e) => {
+        setSearchType(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSearchStatus = (e) => {
+        const value = e.target.value;
+        setSearchStatus(value === "" ? "" : value === "true");
+        setCurrentPage(1);
+    };
+
+    const handleStartDateChange = (e) => {
+        setStartDate(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value);
+        setCurrentPage(1);
+    };
     return (
         <>
             <div className="e-table pb-5 table-responsive">
                 {/* {isLoading && <Loader />} */}
                 <Row className="justify-content-end">
-                    <Col as={Col} sm={3}>
+                    <Col as={Col} sm={2}>
                         <Form.Group className="m-3">
-                            <Form.Control type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+                            <Form.Control type="text" placeholder="Search By Title" value={searchTerm} onChange={handleSearch} style={{ width: "8rem", fontSize: "12px" }}/>
                         </Form.Group>
                     </Col>
+                    <Col as={Col} sm={3}>
+                        <Form.Group className="m-3">
+                            <Form.Control type="text" placeholder="Search By Type" value={searchType} onChange={handleSearchType} style={{ width: "8rem", fontSize: "12px" }}/>
+                        </Form.Group>
+                    </Col>
+                    <Col as={Col} sm={3}>
+                        <Form.Group className="m-3">
+                            <Form.Select
+                                value={searchStatus}
+                                onChange={handleSearchStatus}
+                                style={{ width: "8rem", fontSize: "12px" }}
+                            >
+                            <option value="">Search By Status</option>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
+                    <Col sm={2}>
+                        <Form.Group className="m-3 ">
+                        <OverlayTrigger placement="top" overlay={<Tooltip>start date</Tooltip>}>
+                            <Form.Control
+                                type="date"
+                                placeholder=""
+                                value={startDate}
+                                onChange={handleStartDateChange}
+                                style={{ width: "7rem", fontSize: "12px" }}
+                                // onFocus={(e) => e.target.setAttribute("placeholder", "")} // Remove placeholder on focus
+                                // onBlur={(e) => e.target.setAttribute("placeholder", "Date From")} // Restore placeholder on blur
+                            />
+                        </OverlayTrigger>
+                            {/* <span className="placeholder mx-2 " >Date From</span> */}
+                        </Form.Group>
+                        </Col>
+                        <Col sm={2}>
+                                <Form.Group className="m-3">
+                                <OverlayTrigger placement="top" overlay={<Tooltip>end date</Tooltip>}>
+                                    <Form.Control
+                                        type="date"
+                                        placeholder="Date to"
+                                        value={endDate}
+                                        onChange={handleEndDateChange}
+                                        style={{ width: "7rem", fontSize: "12px" }}
+                                    />
+                                </OverlayTrigger>
+                                    {/* <span className="placeholder mx-2 " >Date To</span> */}
+                                </Form.Group>
+                        </Col>
                 </Row>
                 <DataTable data={currentItems} columns={COLUMNS} striped />
                 <div className="pagination_wrapper">

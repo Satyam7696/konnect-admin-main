@@ -11,6 +11,9 @@ export default function PlanSchemaDataTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchDuration, setSearchDuration] = useState("");
+    const [searchLevel, setSearchLevel] = useState("");
+    const [searchStatus, setSearchStatus] = useState("");
     const dispatch = useDispatch();
 
     const data = [
@@ -84,8 +87,8 @@ export default function PlanSchemaDataTable() {
                     <input
                       type="checkbox"
                       className="custom-switch-input"
-                    // onChange={handleStatusChange}
-                    // checked={checked}  //to fix the checkbox
+                        // onChange={handleStatusChange}
+                        // checked={checked}  //to fix the checkbox
                     checked={checked}
                     />
                     <span className="custom-switch-indicator custum-green-btn"></span>
@@ -112,9 +115,12 @@ export default function PlanSchemaDataTable() {
         },
     ];
 
-    const filteredData = data?.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredData = data
+    .filter((item) =>item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((item) =>item.duration.toLowerCase().includes(searchDuration.toLowerCase()))
+    .filter((item) =>item.level.toLowerCase().includes(searchLevel.toLowerCase()))
+    .filter((item) => (searchStatus !== "" ? item.status === searchStatus : true));
+    
     const itemsPerPage = pageSize;
     const totalPages = Math.ceil(filteredData?.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -164,13 +170,52 @@ export default function PlanSchemaDataTable() {
         setCurrentPage(1);
     };
 
+    const handleSearchDuration = (e) => {
+        setSearchDuration(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSearchLevel = (e) => {
+        setSearchLevel(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSearchStatus = (e) => {
+        const value = e.target.value;
+        setSearchStatus(value === "" ? "" : value === "true");
+        setCurrentPage(1);
+    };
+
     return (
         <>
             <div className="e-table pb-5 table-responsive">
                 <Row className="justify-content-end">
                     <Col as={Col} sm={3}>
                         <Form.Group className="m-3">
-                            <Form.Control type="text" placeholder="Search..." value={searchTerm} onChange={handleSearch} />
+                            <Form.Control type="text" placeholder="Search By Title" value={searchTerm} onChange={handleSearch} />
+                        </Form.Group>
+                    </Col>
+                    <Col as={Col} sm={3}>
+                        <Form.Group className="m-3">
+                            <Form.Control type="text" placeholder="Search By Duration" value={searchDuration} onChange={handleSearchDuration} />
+                        </Form.Group>
+                    </Col>
+                    <Col as={Col} sm={3}>
+                        <Form.Group className="m-3">
+                            <Form.Control type="text" placeholder="Search By Level" value={searchLevel} onChange={handleSearchLevel} />
+                        </Form.Group>
+                    </Col>
+                    <Col sm={3}>
+                        <Form.Group className="m-3">
+                            <Form.Select
+                                value={searchStatus}
+                                onChange={handleSearchStatus}
+                                style={{ width: "8rem", fontSize: "12px" }}
+                            >
+                            <option value="">Search By Status</option>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                            </Form.Select>
                         </Form.Group>
                     </Col>
                 </Row>
