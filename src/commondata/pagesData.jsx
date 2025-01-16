@@ -127,17 +127,17 @@ export default function PagesDataTable() {
 
     const filteredData = postsData
     .filter((item) =>item.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter((item) =>item.type.toLowerCase().includes(searchType.toLowerCase()))
-    .filter((item) => (searchStatus !== "" ? item.status === searchStatus : true))
-    .filter((item) => {
-        if (startDate && endDate) {
-            const itemDate = new Date(item.date);
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            return itemDate >= start && itemDate <= end;
-        }
-        return true;
-    });
+    .filter((item) =>item.type.toLowerCase().includes(searchTerm.toLowerCase()))
+    // .filter((item) => (searchStatus !== "" ? item.status === searchStatus : true))
+    // .filter((item) => {
+    //     if (startDate && endDate) {
+    //         const itemDate = new Date(item.date);
+    //         const start = new Date(startDate);
+    //         const end = new Date(endDate);
+    //         return itemDate >= start && itemDate <= end;
+    //     }
+    //     return true;
+    // });
 
     const itemsPerPage = pageSize;
     const totalPages = Math.ceil(filteredData?.length / itemsPerPage);
@@ -188,37 +188,37 @@ export default function PagesDataTable() {
         setCurrentPage(1);
     };
 
-    const handleSearchType = (e) => {
-        setSearchType(e.target.value);
-        setCurrentPage(1);
-    };
+    // const handleSearchType = (e) => {
+    //     setSearchType(e.target.value);
+    //     setCurrentPage(1);
+    // };
 
-    const handleSearchStatus = (e) => {
-        const value = e.target.value;
-        setSearchStatus(value === "" ? "" : value === "true");
-        setCurrentPage(1);
-    };
+    // const handleSearchStatus = (e) => {
+    //     const value = e.target.value;
+    //     setSearchStatus(value === "" ? "" : value === "true");
+    //     setCurrentPage(1);
+    // };
 
-    const handleStartDateChange = (e) => {
-        setStartDate(e.target.value);
-        setCurrentPage(1);
-    };
+    // const handleStartDateChange = (e) => {
+    //     setStartDate(e.target.value);
+    //     setCurrentPage(1);
+    // };
 
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-        setCurrentPage(1);
-    };
+    // const handleEndDateChange = (e) => {
+    //     setEndDate(e.target.value);
+    //     setCurrentPage(1);
+    // };
     return (
         <>
             <div className="e-table pb-5 table-responsive">
                 {/* {isLoading && <Loader />} */}
                 <Row className="justify-content-end">
-                    <Col as={Col} sm={2}>
+                    <Col as={Col} sm={3}>
                         <Form.Group className="m-3">
-                            <Form.Control type="text" placeholder="Search By Title" value={searchTerm} onChange={handleSearch} style={{ width: "8rem", fontSize: "12px" }}/>
+                            <Form.Control type="text" placeholder="Search ...." value={searchTerm} onChange={handleSearch} />
                         </Form.Group>
                     </Col>
-                    <Col as={Col} sm={3}>
+                    {/* <Col as={Col} sm={3}>
                         <Form.Group className="m-3">
                             <Form.Control type="text" placeholder="Search By Type" value={searchType} onChange={handleSearchType} style={{ width: "8rem", fontSize: "12px" }}/>
                         </Form.Group>
@@ -250,7 +250,7 @@ export default function PagesDataTable() {
                             />
                         </OverlayTrigger>
                             {/* <span className="placeholder mx-2 " >Date From</span> */}
-                        </Form.Group>
+                        {/* </Form.Group>
                         </Col>
                         <Col sm={2}>
                                 <Form.Group className="m-3">
@@ -264,8 +264,8 @@ export default function PagesDataTable() {
                                     />
                                 </OverlayTrigger>
                                     {/* <span className="placeholder mx-2 " >Date To</span> */}
-                                </Form.Group>
-                        </Col>
+                                {/* </Form.Group>
+                        </Col>   */}
                 </Row>
                 <DataTable data={currentItems} columns={COLUMNS} striped />
                 <div className="pagination_wrapper">

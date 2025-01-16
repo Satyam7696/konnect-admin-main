@@ -210,16 +210,16 @@ export default function UserTransactionTable() {
                             placeholder="Search By Amount"
                             value={searchAmount}
                             onChange={handleSearchAmount}
-                            style={{ width: "9rem", fontSize: "12px" }} // Adjust font size for the input text and placeholder
+                            style={{ width: "8rem", fontSize: "12px" }} // Adjust font size for the input text and placeholder
                         />
                     </Form.Group>
                 </Col>
-                <Col sm={3}>
+                <Col sm={2}>
                     <Form.Group className="m-3">
                         <Form.Select
                             value={searchTransaction}
                             onChange={handleSearchTransaction}
-                            style={{ width: "9rem", fontSize: "12px" }}
+                            style={{ width: "7rem", fontSize: "12px" }}
                         >
                             <option value="">Search By TransType</option>
                             <option value="Debit">Debit</option>
@@ -232,7 +232,7 @@ export default function UserTransactionTable() {
                         <Form.Select
                             value={searchStatus}
                             onChange={handleSearchStatus}
-                            style={{ width: "8rem", fontSize: "12px" }}
+                            style={{ width: "7rem", fontSize: "12px" }}
                         >
                             <option value="">Search By Status</option>
                             <option value="Completed">Completed</option>

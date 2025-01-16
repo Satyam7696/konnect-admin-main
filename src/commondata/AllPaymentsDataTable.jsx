@@ -128,11 +128,11 @@ export default function AllPaymentsDataTable() {
     return (
         <div className="e-table pb-5 table-responsive">
             <Row className="justify-content-end">
-                <Col sm={3}>
+                <Col sm={2}>
                     <Form.Group className="m-3">
                         <Form.Control
                             type="text"
-                            placeholder="Search By Name"
+                            placeholder="Search ....."
                             value={searchTerm}
                             onChange={handleSearch}
                         />

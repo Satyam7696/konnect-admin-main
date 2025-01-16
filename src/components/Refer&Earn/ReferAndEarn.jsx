@@ -2,6 +2,7 @@ import React, { useState }from "react";
 import { Card, Row, Col, Button, Form } from "react-bootstrap";
 import { FaCopy } from "react-icons/fa";
 import toast from "react-hot-toast";
+
 // import img from "../../assets/images/media/OIP.jpg";
 
 export default function ReferAndEarn() {
@@ -19,6 +20,8 @@ export default function ReferAndEarn() {
   const [friendImage, setFriendImage] = useState(null);
   const [rewardAmount, setRewardAmount] = useState(50); // Default reward amount
   const [rewardAmounts, setRewardAmounts] = useState(20); // Default reward amount
+  const [friendSignupText, setFriendSignupText] = useState("When they sign up"); // Dynamic text for friend's action
+  const [friendfirstSignup, setFriendFirstSignup] = useState("On your friend's 1st sign up"); // Dynamic text for friend's action
 
   // Function to handle image upload
   const handleImageUpload = (e) => {
@@ -80,13 +83,21 @@ export default function ReferAndEarn() {
                       <Form.Label>Reward Amount</Form.Label>
                       <Form.Control
                         type="text"
-                        value={`$${rewardAmount}`}
+                        value={rewardAmount}
                         onChange={handleRewardChange}
-                        className="text-center border-warning bg-light"
+                        className="text-center bg-light"
                       />
                     </Form.Group>
                 </p>
-                <p>On your friend's 1st sign up</p>
+                <Form.Group className="mb-3">
+                  {/* <Form.Label>Friend Signup Text</Form.Label> */}
+                  <Form.Control
+                    type="text"
+                    value={friendfirstSignup}
+                    onChange={(e) => setFriendFirstSignup(e.target.value)}
+                    className="text-center bg-light"
+                  />
+                </Form.Group>
               </Col>
               <Col md={6} className="text-center">
               <h5>Friends Get</h5>
@@ -107,15 +118,24 @@ export default function ReferAndEarn() {
                     <Form.Label>Reward Amount</Form.Label>
                     <Form.Control
                       type="text"
-                      value={`$${rewardAmounts}`}
+                      value={rewardAmounts}
                       onChange={handleRewardChanges}
-                      className="text-center border-warning bg-light"
+                      className="text-center bg-light"
                       // style={{ width: "7rem", fontSize: "12px", alignItems:"center", justifyContent: "center" }}
                     />
                   </Form.Group>
                   {/* <strong>${rewardAmount} Reward</strong> */}
                 </p>
-                <p>When they sign up</p>
+                <Form.Group className="mb-3">
+                  {/* <Form.Label>Friend Signup Text</Form.Label> */}
+                  <Form.Control
+                    type="text"
+                    value={friendSignupText}
+                    onChange={(e) => setFriendSignupText(e.target.value)}
+                    className="text-center bg-light"
+                  />
+                </Form.Group>
+                {/* <p>{friendSignupText}</p> */}
               </Col>
             </Row>
             <hr />
