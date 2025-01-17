@@ -20,6 +20,12 @@ import EditTransaction from "../components/PaymentHistory/EditTransaction";
 import PaymentHistory from "../components/PaymentHistory/Paymenthistory";
 import AddPage from "../components/pages/AddPage";
 import ReferAndEarn from "../components/Refer&Earn/ReferAndEarn";
+import SkillsPage from "../components/skills-dynamic/SkillsPage";
+import EditSkill from "../components/skills-dynamic/EditSkill";
+import AddSkill from "../components/skills-dynamic/AddSkill";
+import ViewSkill from "../components/skills-dynamic/ViewSkill";
+import DeleteSkill from "../components/skills-dynamic/DeleteSkill";
+import MostSearchedSkills from "../components/Most-Searched-Skills/MostSearchedSkills";
 
 
 export const RouterData = [
@@ -39,6 +45,12 @@ export const RouterData = [
   { path: `${import.meta.env.BASE_URL}/payment-history`, element: <PaymentHistory/> },
   { path: `${import.meta.env.BASE_URL}/edit-transaction`, element: <EditTransaction/> },
   { path: `${import.meta.env.BASE_URL}/view-transaction`, element: <ViewTransaction/> },
+  { path: `${import.meta.env.BASE_URL}/skills-page`, element: <SkillsPage /> },
+  { path: `${import.meta.env.BASE_URL}/edit-skill`, element: <EditSkill /> },
+  { path: `${import.meta.env.BASE_URL}/add-skill`, element: <AddSkill /> },
+  { path: `${import.meta.env.BASE_URL}/view-skill`, element: <ViewSkill /> },
+  { path: `${import.meta.env.BASE_URL}/most-searched-skill`, element: <MostSearchedSkills /> },
+  // { path: `${import.meta.env.BASE_URL}/delete-skill`, element: <DeleteSkill /> },
 
 
   { path: `${import.meta.env.BASE_URL}/profile`, element: <UserProfile /> },

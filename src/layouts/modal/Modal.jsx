@@ -33,6 +33,10 @@ import AddTransaction from "../../components/PaymentHistory/AddTransaction";
 import EditTransaction from "../../components/PaymentHistory/EditTransaction";
 import BlockUserModal from "../../components/user-profile/BlockUserModal";
 import ReferAndEarn from "../../components/Refer&Earn/ReferAndEarn";
+import AddSkill from "../../components/skills-dynamic/AddSkill";
+import EditSkill from "../../components/skills-dynamic/EditSkill";
+import DeleteSkill from "../../components/skills-dynamic/DeleteSkill";
+import MostSearchedSkills from "../../components/Most-Searched-Skills/MostSearchedSkills";
 
 export default function Modal() {
   const { isOpen, componentName } = useSelector(
@@ -138,6 +142,19 @@ export default function Modal() {
 
       case "ReferAndEarn":
         return <ReferAndEarn />;
+
+        case "AddSkill":
+          return <AddSkill />;
+        // case "ViewSinglePage":
+        //   return <ViewSinglePage />;
+        case "EditSkill":
+          return <EditSkill />;
+  
+        case "DeleteSkill":
+          return <DeleteSkill />;
+
+        case "MostSearchedSkill":
+          return <MostSearchedSkills />;
 
       default:
         return null;

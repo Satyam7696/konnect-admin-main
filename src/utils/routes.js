@@ -37,3 +37,11 @@ export function getPaymentHistory() {
 export function getReferAndEarn() {
   return `/refer&earn`
 }
+
+export function getSkillPage() {
+  return `/skills-page`
+}
+
+export function MostSearchedSkill() {
+  return `/most-searched-skill`
+}

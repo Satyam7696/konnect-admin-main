@@ -135,5 +135,31 @@ export const MENUITEMS = [
       },
     ],
   },
+
+  {
+    Items: [
+      {
+        path: `/skills-page`,
+        icon: "file",
+        viewPath: ``,
+        type: "link",
+        active: false,
+        title: "Skill Dynamics",
+      },
+    ],
+  },
+
+  {
+    Items: [
+      {
+        path: `/most-searched-skill`,
+        icon: "file",
+        viewPath: ``,
+        type: "link",
+        active: false,
+        title: "Most Searched Skill",
+      },
+    ],
+  },
 ]
 

@@ -16,6 +16,11 @@ export const AddPageValidation = Yup.object().shape({
     // confirm_password: Yup.string().required("This field is required."),
 })
 
+export const AddSkillValidation = Yup.object().shape({
+    name: Yup.string().required("Name is required."),
+    status: Yup.string().required("Status is required."),
+});
+
 export const AddPlanSchemaValidation = Yup.object().shape({
         title: Yup.string().required("Title is required"),
         description: Yup.string().required("Description is required"),
